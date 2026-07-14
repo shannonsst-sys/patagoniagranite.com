@@ -1,0 +1,31 @@
+---
+import BaseLayout from '@components/BaseLayout.astro';
+import { site } from '@data/site';
+const requestedSlab = Astro.url.searchParams.get('slab') || '';
+---
+<BaseLayout title="Request Patagonia Granite Slabs & Quote" description="Contact TM Stone for current Patagonia Granite slab photos, available sizes, thickness, finish, cut-to-size fabrication and project quotation.">
+  <section class="page-hero"><img src="/assets/images/hero/patagonia-granite-homepage-hero-living-room-01.webp" alt="Patagonia Granite feature wall in luxury interior" /><div class="page-hero-content"><div><p class="eyebrow">Project inquiry</p><h1>Start with the exact slab.</h1><p>Tell us the application, thickness, finish, quantity, destination and timing. Add drawings or preferred slab references when available.</p></div></div></section>
+  <section class="section container contact-grid">
+    <div><p class="eyebrow">TM Stone</p><h2>Clear details create a useful quote.</h2><p>For the fastest reply, include the material or slab reference, net quantity, finished dimensions or drawings, surface finish, edge details, destination port and required date.</p><div class="contact-details"><div><small>WhatsApp / Phone</small><a href={`https://wa.me/${site.whatsapp}`}>{site.phoneDisplay}</a></div><div><small>Email</small><a href={`mailto:${site.email}`}>{site.email}</a></div><div><small>Factory & showroom</small><p>{site.address}</p></div><div><small>Typical scope</small><p>Slabs · cut-to-size · countertops · walls · stairs · custom fabrication</p></div></div></div>
+    <form class="inquiry-form" action={site.formEndpoint} method="POST">
+      <input type="hidden" name="_subject" value="Patagonia Granite website inquiry" />
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="honeypot" aria-hidden="true" />
+      <div class="form-grid">
+        <div class="field"><label for="name">Name *</label><input id="name" name="name" required autocomplete="name" /></div>
+        <div class="field"><label for="email">Email *</label><input id="email" name="email" type="email" required autocomplete="email" /></div>
+        <div class="field"><label for="phone">WhatsApp / phone</label><input id="phone" name="phone" autocomplete="tel" /></div>
+        <div class="field"><label for="company">Company</label><input id="company" name="company" autocomplete="organization" /></div>
+        <div class="field"><label for="material">Material / slab</label><input id="material" name="material" value={requestedSlab} placeholder="e.g. PAT-07" /></div>
+        <div class="field"><label for="application">Application</label><select id="application" name="application"><option>Slab supply</option><option>Kitchen / countertop</option><option>Feature wall</option><option>Hospitality / commercial</option><option>Floor / stairs</option><option>Custom fabrication</option></select></div>
+        <div class="field"><label for="thickness">Thickness</label><select id="thickness" name="thickness"><option>To be confirmed</option><option>18 mm</option><option>20 mm</option><option>30 mm</option><option>Custom</option></select></div>
+        <div class="field"><label for="finish">Finish</label><select id="finish" name="finish"><option>Polished</option><option>Honed</option><option>Leathered</option><option>To be confirmed</option></select></div>
+        <div class="field"><label for="quantity">Quantity</label><input id="quantity" name="quantity" placeholder="Slabs, m² or project quantity" /></div>
+        <div class="field"><label for="destination">Destination port / country</label><input id="destination" name="destination" /></div>
+        <div class="field full"><label for="message">Message / drawing link *</label><textarea id="message" name="message" required placeholder="Project dimensions, timing, edge details, preferred slab tone, drawing link or other requirements"></textarea></div>
+        <div class="field full"><button class="button" type="submit">Send inquiry</button></div>
+      </div>
+      <p class="form-note">This form is securely processed by Formspree. By submitting, you agree that TM Stone may reply to your project inquiry.</p>
+    </form>
+  </section>
+</BaseLayout>
+<style>.inquiry-form{background:white;padding:clamp(1.5rem,4vw,3.5rem);border:1px solid var(--line)}.honeypot{position:absolute!important;left:-9999px!important}.form-note{font-size:.72rem;color:var(--muted);margin:1.3rem 0 0}</style>

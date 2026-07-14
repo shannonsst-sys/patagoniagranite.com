@@ -1,0 +1,45 @@
+{
+  "slug": "new-stone-seo-article",
+  "title": "New Stone SEO Article Title",
+  "description": "Short SEO description for Google search results.",
+  "date": "2026-07-13",
+  "category": "Stone Guide",
+  "tags": ["stone guide"],
+  "coverImage": {
+    "src": "/assets/images/blog/new-stone-seo-article/cover.webp",
+    "alt": "Stone article cover image",
+    "role": "cover"
+  },
+  "sections": [
+    {
+      "heading": "Main answer section",
+      "body": "Write practical buyer-focused content here.",
+      "image": {
+        "src": "/assets/images/blog/new-stone-seo-article/detail-01.webp",
+        "alt": "Stone detail image for SEO article",
+        "role": "application"
+      }
+    },
+    {
+      "heading": "Comparison table",
+      "body": "Use this section to compare finishes, materials, thicknesses, or price factors.",
+      "table": {
+        "headers": ["Item", "Option A", "Option B"],
+        "rows": [
+          ["Visual effect", "Bright and reflective", "Soft and matte"],
+          ["Best use", "Luxury kitchens", "Minimalist interiors"]
+        ]
+      }
+    },
+    {
+      "heading": "Request current stone options",
+      "body": "Contact us with material, thickness, finish, quantity, drawings, and destination port.",
+      "cta": {
+        "label": "Request current slabs",
+        "href": "/contact/"
+      }
+    }
+  ],
+  "relatedProductSlugs": ["new-stone-product"]
+}
+

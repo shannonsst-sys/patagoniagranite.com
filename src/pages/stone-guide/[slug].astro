@@ -1,0 +1,29 @@
+---
+import BaseLayout from '@components/BaseLayout.astro';
+import InquiryBand from '@components/InquiryBand.astro';
+import { posts } from '@data/posts';
+
+export function getStaticPaths(){ return posts.map(post=>({params:{slug:post.slug},props:{post}})); }
+const { post } = Astro.props;
+const articleSchema = {'@context':'https://schema.org','@type':'Article',headline:post.title,description:post.description,datePublished:post.date,dateModified:post.date,image:new URL(post.image,'https://patagoniagranite.com').href,author:{'@type':'Organization',name:'TM Stone'},publisher:{'@type':'Organization',name:'TM Stone'},mainEntityOfPage:new URL(Astro.url.pathname,'https://patagoniagranite.com').href};
+const faqSchema = {'@context':'https://schema.org','@type':'FAQPage',mainEntity:post.faqs.map(item=>({'@type':'Question',name:item.q,acceptedAnswer:{'@type':'Answer',text:item.a}}))};
+---
+<BaseLayout title={post.title} description={post.description} image={post.image} schema={[articleSchema,faqSchema]}>
+  <article>
+    <header class="article-hero"><div class="article-title"><p class="eyebrow">Stone guide · {post.readTime}</p><h1>{post.title}</h1><p>{post.description}</p><small>Updated {post.date} · Reviewed by TM Stone sourcing & fabrication team</small></div><img src={post.image} alt={post.title} fetchpriority="high" /></header>
+    <div class="prose section">
+      <p class="lead">{post.intro}</p>
+      <div class="article-nav"><strong>In this guide</strong>{post.sections.map((section,index)=><a href={`#section-${index+1}`}>{section.heading}</a>)}</div>
+      {post.sections.map((section,index)=><section id={`section-${index+1}`}><h2>{section.heading}</h2>{section.paragraphs.map((paragraph)=><p>{paragraph}</p>)}{section.bullets&&<ul>{section.bullets.map((item)=><li>{item}</li>)}</ul>}{index===0&&<figure class="article-image"><img src="/assets/images/hero/patagonia-granite-texture-close-up-02.webp" alt="Close-up mineral texture of natural Patagonia Granite" loading="lazy" /><figcaption>Patagonia Granite must be evaluated at both slab scale and crystal-detail scale.</figcaption></figure>}{index===1&&<aside class="article-cta"><p class="eyebrow">Current lot check</p><h3>See today's available slabs.</h3><p>Request straight-on slab photos, dimensions, quantity and finish before you approve a project.</p><a class="button" href="/contact/">Request current photos</a></aside>}</section>)}
+      <h2>Quick comparison</h2>
+      <div class="table-wrap"><table class="spec-table"><thead><tr><th>Decision</th><th>What to confirm</th><th>Why it matters</th></tr></thead><tbody><tr><td>Slab face</td><td>Exact slab photos and lot</td><td>Patagonia does not repeat</td></tr><tr><td>Thickness</td><td>18, 20, 30 mm or custom</td><td>Affects weight, edge design and support</td></tr><tr><td>Finish</td><td>Polished, honed or leathered sample</td><td>Changes color, reflection and care</td></tr><tr><td>Layout</td><td>Scaled cuts, seams and focal zones</td><td>Protects the strongest composition</td></tr><tr><td>Scope</td><td>Slabs only or finished fabrication</td><td>Creates a comparable quotation</td></tr></tbody></table></div>
+      <h2>Frequently asked questions</h2>
+      <div class="faq">{post.faqs.map((item)=><details><summary>{item.q}</summary><p>{item.a}</p></details>)}</div>
+      <p class="source-note">Technical care guidance is aligned with the <a href="https://www.naturalstoneinstitute.org/consumers/care/" rel="noopener">Natural Stone Institute consumer care guidance</a>. Natural stone varies; always confirm performance, treatment and installation requirements for the actual material and project.</p>
+    </div>
+  </article>
+  <InquiryBand title="Turn the guide into a project-ready slab selection" />
+</BaseLayout>
+<style>
+  .article-hero{display:grid;grid-template-columns:1fr 1fr;min-height:75vh;background:#ded7cb}.article-title{padding:clamp(4rem,8vw,9rem) 5vw;display:flex;flex-direction:column;justify-content:center}.article-title h1{font-size:clamp(3rem,6vw,6.5rem)}.article-title>p:not(.eyebrow){color:var(--muted);font-size:1.05rem;max-width:620px;margin:1.5rem 0}.article-title small{color:var(--muted)}.article-hero>img{width:100%;height:100%;object-fit:cover;max-height:850px}.article-nav{display:grid;gap:.7rem;margin:3rem 0;padding:2rem;border:1px solid var(--line);background:white}.article-nav a{color:var(--muted);text-decoration:underline;text-underline-offset:.25rem}.article-cta{margin:3rem 0;padding:2.5rem;background:#e3d9cc}.article-cta p{max-width:550px}.source-note{margin-top:4rem;padding-top:1.5rem;border-top:1px solid var(--line);font-size:.82rem}.table-wrap{overflow:auto}.prose .spec-table{min-width:700px}@media(max-width:900px){.article-hero{grid-template-columns:1fr}.article-hero>img{height:55vh}.article-title{order:2}}
+</style>

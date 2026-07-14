@@ -1,0 +1,22 @@
+---
+import BaseLayout from '@components/BaseLayout.astro';
+import InquiryBand from '@components/InquiryBand.astro';
+import { slabs, product } from '@data/slabs';
+
+export function getStaticPaths() { return slabs.map((slab) => ({ params: { slug: slab.slug }, props: { slab } })); }
+const { slab } = Astro.props;
+const schema = { '@context':'https://schema.org', '@type':'Product', name:slab.name, image:[new URL(slab.image,'https://patagoniagranite.com').href], description:`${slab.tone}. Representative natural Patagonia Granite slab. Contact TM Stone for current lot availability.`, material:'Natural Patagonia Granite', brand:{'@type':'Brand',name:'TM Stone'} };
+---
+<BaseLayout title={`${slab.code} Patagonia Granite Slab`} description={`${slab.code}: ${slab.tone}. View complete slab, details and application reference. Request current lot availability, dimensions and quotation.`} image={slab.image} schema={schema}>
+  <section class="slab-detail">
+    <div class="slab-stage"><img src={slab.image} alt={`Complete natural Patagonia Granite slab ${slab.code}`} fetchpriority="high" data-main-image /></div>
+    <div class="slab-info"><p class="eyebrow">Representative slab · {slab.code}</p><h1>{slab.tone}</h1><p>Natural Patagonia Granite selected for its individual mineral composition. Use this face as a visual reference and contact us to confirm the current lot.</p><table class="spec-table"><tbody><tr><th>Type</th><td>Natural stone slab</td></tr><tr><th>Finish</th><td>Polished · other finishes on request</td></tr><tr><th>Thickness</th><td>{product.thicknesses.join(' · ')}</td></tr><tr><th>Nominal size</th><td>Call for available slab sizes</td></tr><tr><th>Availability</th><td>Contact for latest slabs</td></tr></tbody></table><p class="notice">Slab lots update quickly. Please contact us for current lot photos, quantities, and updated slab sizes.</p><div class="button-row"><a class="button" href={`/contact/?slab=${slab.code}`}>Ask about {slab.code}</a><a class="text-link" href="/slabs/">All slabs →</a></div></div>
+  </section>
+  <section class="section container"><div class="thumb-grid"><button type="button" data-src={slab.image}><img src={slab.image} alt={`${slab.code} complete slab thumbnail`} /></button><button type="button" data-src={slab.detail}><img src={slab.detail} alt={`${slab.code} Patagonia Granite texture detail`} /></button><button type="button" data-src={slab.application}><img src={slab.application} alt={`${slab.code} Patagonia Granite application reference`} /></button></div></section>
+  <section class="section container split"><div class="split-copy"><p class="eyebrow">Selection guidance</p><h2>Approve the composition before cutting.</h2><p>Use the complete slab face to place focal crystals, plan cutouts, align waterfall returns and reduce visually disruptive seams. For backlit concepts, test the exact slab and intended lighting system.</p><a class="text-link" href="/factory/">How we plan and fabricate →</a></div><div class="split-media"><img src={slab.application} alt={`${slab.code} used in a custom interior application`} loading="lazy" /></div></section>
+  <InquiryBand title={`Request current availability for ${slab.code}`} />
+  <script is:inline>document.querySelectorAll('[data-src]').forEach((button)=>button.addEventListener('click',()=>{const main=document.querySelector('[data-main-image]');if(main)main.src=button.dataset.src;}));</script>
+</BaseLayout>
+<style>
+  .slab-detail{width:min(1500px,94vw);margin:0 auto;padding:clamp(3rem,6vw,7rem) 0;display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(2rem,6vw,7rem);align-items:center}.slab-stage{height:78vh;min-height:600px;background:#171716;display:grid;place-items:center}.slab-stage img{width:100%;height:100%;object-fit:contain}.slab-info h1{font-size:clamp(3rem,6vw,6rem)}.slab-info>p{color:var(--muted);margin-top:1.3rem}.thumb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.thumb-grid button{border:1px solid var(--line);padding:0;background:#191918;cursor:pointer;aspect-ratio:4/3;overflow:hidden}.thumb-grid img{width:100%;height:100%;object-fit:contain}@media(max-width:900px){.slab-detail{grid-template-columns:1fr}.slab-stage{height:58vh;min-height:400px}}@media(max-width:600px){.thumb-grid{grid-template-columns:1fr 1fr}.thumb-grid button:last-child{grid-column:1/-1}}
+</style>

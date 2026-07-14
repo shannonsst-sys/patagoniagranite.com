@@ -1,0 +1,81 @@
+---
+import { site, navigation } from '@data/site';
+import '@styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { title, description = site.description, image = '/og.png', canonical = Astro.url.pathname, schema } = Astro.props;
+const pageTitle = title === site.brand ? `${site.brand} Slabs & Custom Stonework | TM Stone` : `${title} | ${site.brand}`;
+const canonicalUrl = new URL(canonical, site.domain).href;
+const imageUrl = new URL(image, site.domain).href;
+const orgSchema = {
+  '@context': 'https://schema.org', '@type': 'Organization', name: 'TM Stone',
+  url: site.domain, email: site.email, telephone: site.phoneDisplay,
+  address: { '@type': 'PostalAddress', streetAddress: site.address, addressCountry: 'CN' }
+};
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={imageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="announcement">Natural Patagonia stone · real slab selection · worldwide project support</div>
+    <header class="site-header" data-header>
+      <a class="brand" href="/" aria-label="Patagonia Granite home">
+        <span class="brand-mark">PG</span>
+        <span><strong>Patagonia Granite</strong><small>Selected by TM Stone</small></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-menu-toggle>Menu</button>
+      <nav class="main-nav" aria-label="Main navigation" data-nav>
+        {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="site-footer">
+      <div class="footer-lead">
+        <p class="eyebrow">Begin with the slab</p>
+        <h2>Tell us what you are creating.</h2>
+        <a class="button light" href="/contact/">Request a tailored quote</a>
+      </div>
+      <div class="footer-grid">
+        <div><strong>Patagonia Granite</strong><p>A dedicated source for expressive natural slabs, thoughtful selection and project-ready fabrication.</p></div>
+        <div><strong>Explore</strong><a href="/slabs/">Current slabs</a><a href="/applications/">Applications</a><a href="/factory/">Factory</a></div>
+        <div><strong>Learn</strong><a href="/stone-guide/patagonia-granite-slabs-buying-guide/">Buying guide</a><a href="/stone-guide/patagonia-granite-price-factors/">Price factors</a><a href="/stone-guide/patagonia-granite-care-sealing/">Care & sealing</a></div>
+        <div><strong>Contact</strong><a href={`https://wa.me/${site.whatsapp}`}>WhatsApp</a><a href={`mailto:${site.email}`}>{site.email}</a><span>{site.address}</span></div>
+      </div>
+      <div class="footer-bottom">© {new Date().getFullYear()} TM Stone · Natural stone varies by slab · Verify current lots before ordering</div>
+    </footer>
+    <div class="floating-actions" aria-label="Quick actions">
+      <a href={`https://wa.me/${site.whatsapp}`} aria-label="WhatsApp">WA</a>
+      <a href={`tel:${site.phone}`} aria-label="Call TM Stone">Call</a>
+      <button type="button" aria-label="Back to top" data-top>↑</button>
+    </div>
+    <script is:inline>
+      const btn = document.querySelector('[data-menu-toggle]');
+      const nav = document.querySelector('[data-nav]');
+      btn?.addEventListener('click', () => { const open = btn.getAttribute('aria-expanded') === 'true'; btn.setAttribute('aria-expanded', String(!open)); nav?.classList.toggle('open', !open); });
+      document.querySelector('[data-top]')?.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
+    </script>
+  </body>
+</html>

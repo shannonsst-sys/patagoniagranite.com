@@ -1,0 +1,11 @@
+---
+import BaseLayout from '@components/BaseLayout.astro';
+import SectionHeading from '@components/SectionHeading.astro';
+import InquiryBand from '@components/InquiryBand.astro';
+import { posts } from '@data/posts';
+---
+<BaseLayout title="Patagonia Granite Stone Guide" description="Practical Patagonia Granite guides covering slab selection, kitchen countertops, pricing, care, sealing and project buying decisions.">
+  <section class="page-hero"><img src="/assets/images/hero/patagonia-granite-homepage-hero-living-room-02.webp" alt="Patagonia Granite slab feature wall in luxury living room" /><div class="page-hero-content"><div><p class="eyebrow">Stone guide</p><h1>Buy the slab with better context.</h1><p>Clear, practical guidance for architects, fabricators, importers and homeowners comparing Patagonia Granite for real projects.</p></div></div></section>
+  <section class="section container"><SectionHeading eyebrow="Search-led editorial" title="Slabs, countertops, price and care." copy="Each guide connects material knowledge with current slab selection, fabrication and project inquiry." /><div class="card-grid">{posts.map((post)=><a class="visual-card" href={`/stone-guide/${post.slug}/`}><div class="media"><img src={post.image} alt={post.title} loading="lazy" /></div><div class="body"><p class="eyebrow">Updated {post.date} · {post.readTime}</p><h3>{post.title}</h3><p>{post.description}</p></div></a>)}</div></section>
+  <InquiryBand />
+</BaseLayout>

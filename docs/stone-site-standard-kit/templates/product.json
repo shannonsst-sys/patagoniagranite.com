@@ -1,0 +1,38 @@
+{
+  "slug": "new-stone-product",
+  "name": "New Stone Product",
+  "categorySlug": "natural-stone",
+  "material": "Quartzite",
+  "origin": "Brazil",
+  "summary": "Short product summary for cards and listing pages.",
+  "description": "Longer product description focused on material appearance, usage, supply, and inquiry guidance.",
+  "finishes": ["Polished", "Honed"],
+  "thicknesses": ["20mm", "30mm"],
+  "nominalSize": "Call for available slab sizes",
+  "availabilityLabel": "Current lots available",
+  "bestSuited": ["Kitchen countertops", "Island", "Vanity", "Feature wall"],
+  "applications": ["Residential", "Hotel", "Commercial projects"],
+  "coverImage": {
+    "src": "/assets/images/products/new-stone-product/cover.webp",
+    "alt": "New Stone Product slab with natural veining",
+    "role": "cover"
+  },
+  "gallery": [
+    {
+      "src": "/assets/images/products/new-stone-product/slab-01.webp",
+      "alt": "Complete slab view of New Stone Product",
+      "role": "slab-full"
+    }
+  ],
+  "specs": [
+    { "label": "Material", "value": "Quartzite" },
+    { "label": "Origin", "value": "Brazil" },
+    { "label": "Thickness", "value": "20mm / 30mm" },
+    { "label": "Finish", "value": "Polished / Honed" },
+    { "label": "Nominal Size", "value": "Call for available slab sizes" }
+  ],
+  "tags": ["stone", "slab"],
+  "faqTags": ["stone"],
+  "relatedProductSlugs": []
+}
+

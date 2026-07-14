@@ -1,0 +1,18 @@
+---
+import BaseLayout from '@components/BaseLayout.astro';
+import SectionHeading from '@components/SectionHeading.astro';
+import InquiryBand from '@components/InquiryBand.astro';
+import { slabs } from '@data/slabs';
+---
+<BaseLayout title="Patagonia Granite Slabs" description="Browse 14 real Patagonia Granite slab faces. Request current lot photos, available sizes, thickness, quantities and fabrication support from TM Stone.">
+  <section class="page-hero"><img src="/assets/images/factory/patagonia-granite-factory-slab-display-01.webp" alt="Patagonia Granite slabs displayed in TM Stone factory" /><div class="page-hero-content"><div><p class="eyebrow">Real slab selection</p><h1>Choose the landscape.</h1><p>Every face is different. Compare representative slabs, then ask us for today's available lots, exact dimensions and quantities.</p><a class="button light" href="/contact/">Request current photos</a></div></div></section>
+  <section class="section container">
+    <SectionHeading eyebrow="Representative slabs" title="One material. Fourteen distinct compositions." copy="Complete slab images use an uncropped, contain-safe presentation. Exact lots change quickly and must be confirmed before ordering." />
+    <p class="notice">Slab lots update quickly. Please contact us for current lot photos, quantities, and updated slab sizes.</p>
+    <div class="slab-grid slab-list">
+      {slabs.map((slab) => <a class="slab-card" href={`/slabs/${slab.slug}/`}><div class="slab-image"><img src={slab.image} alt={`Complete ${slab.name} face`} loading="lazy" /></div><div class="slab-meta"><div><strong>{slab.code}</strong><span>{slab.tone}</span></div><span>View slab →</span></div></a>)}
+    </div>
+  </section>
+  <InquiryBand title="Need today's available Patagonia Granite slabs?" />
+</BaseLayout>
+<style>.slab-list{margin-top:4rem}.slab-meta div span{display:block;margin-top:.3rem}.slab-meta strong{font-family:var(--serif);font-size:1.3rem}</style>

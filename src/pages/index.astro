@@ -1,0 +1,110 @@
+---
+import BaseLayout from '@components/BaseLayout.astro';
+import SectionHeading from '@components/SectionHeading.astro';
+import InquiryBand from '@components/InquiryBand.astro';
+import { slabs } from '@data/slabs';
+import { applications } from '@data/galleries';
+import { posts } from '@data/posts';
+---
+<BaseLayout title="Patagonia Granite" description="Explore real Patagonia Granite slabs for kitchens, feature walls, tables and luxury projects. Current lot selection, fabrication and worldwide export support from TM Stone.">
+  <section class="home-hero">
+    <img src="/assets/images/hero/patagonia-granite-homepage-hero-feature-wall-01.webp" alt="Backlit Patagonia Granite feature wall in a contemporary interior" fetchpriority="high" />
+    <div class="home-hero-overlay"></div>
+    <div class="home-hero-content">
+      <p class="eyebrow">Brazilian natural stone · selected by slab</p>
+      <h1>Stone with<br /><em>no repetition.</em></h1>
+      <p>Select the exact Patagonia Granite slab that will define your island, feature wall, table or signature interior.</p>
+      <div class="button-row"><a class="button light" href="/slabs/">Explore current slabs</a><a class="text-link light-link" href="/contact/">Discuss your project →</a></div>
+    </div>
+    <p class="hero-note">Actual Patagonia Granite application · final character varies by slab</p>
+  </section>
+
+  <div class="stats container">
+    <div class="stat"><strong>14</strong><span>Representative slab faces</span></div>
+    <div class="stat"><strong>18–30 mm</strong><span>Project thickness options</span></div>
+    <div class="stat"><strong>1:1</strong><span>Specific slab selection</span></div>
+    <div class="stat"><strong>Worldwide</strong><span>Packing & project support</span></div>
+  </div>
+
+  <section class="section container split">
+    <div class="split-media"><img src="/assets/images/products/patagonia-granite/patagonia-granite-slab-07.webp" alt="Full face of natural Patagonia Granite slab PAT-07" loading="lazy" /></div>
+    <div class="split-copy">
+      <p class="eyebrow">Not a pattern. A composition.</p>
+      <h2>No two slabs tell the same story.</h2>
+      <p>Patagonia Granite is known for oversized feldspar and quartz crystals, graphic mineral movement and occasional translucent areas. The material rewards careful selection and a layout planned before cutting.</p>
+      <ol class="number-list">
+        <li><span>01</span><div><strong>Select real slabs</strong><p>Quote against exact slab references, not a generic sample.</p></div></li>
+        <li><span>02</span><div><strong>Compose the layout</strong><p>Review focal zones, seams, cutouts and vein direction.</p></div></li>
+        <li><span>03</span><div><strong>Fabricate for the project</strong><p>From large panels to islands, tables, stairs and vanities.</p></div></li>
+      </ol>
+      <a class="text-link" href="/natural-stone/">Understand the material →</a>
+    </div>
+  </section>
+
+  <section class="section slab-showcase">
+    <div class="container">
+      <SectionHeading eyebrow="Current slab selection" title="Choose the landscape." copy="Representative current and recent lots. Ask for today's available slabs, dimensions and quantities before ordering." />
+      <div class="slab-strip">
+        {slabs.slice(0, 5).map((slab) => <a class="slab-tile" href={`/slabs/${slab.slug}/`}><img src={slab.image} alt={`Full natural Patagonia Granite ${slab.code} slab`} loading="lazy" /><span>{slab.code}<small>{slab.tone}</small></span></a>)}
+      </div>
+      <a class="button ghost" href="/slabs/">View all slabs</a>
+    </div>
+  </section>
+
+  <section class="section container">
+    <SectionHeading eyebrow="Made for singular spaces" title="From slab to statement." copy="A strong slab is only the beginning. The final result depends on selection, layout, edge design and fabrication." />
+    <div class="card-grid">
+      {applications.slice(0, 3).map((item) => <a class="visual-card" href="/applications/"><div class="media"><img src={item.image} alt={`${item.title} made with Patagonia Granite`} loading="lazy" /></div><div class="body"><h3>{item.title}</h3><p>{item.description}</p></div></a>)}
+    </div>
+  </section>
+
+  <section class="process-section">
+    <div class="container">
+      <SectionHeading eyebrow="A clearer buying process" title="See it. Select it. Shape it." />
+      <div class="process-grid">
+        {[['01','Share the brief','Send drawings, dimensions, quantity, destination and target timing.'],['02','Select slabs','Shortlist specific slabs by tone, crystal scale and application.'],['03','Confirm layout','Review cuts, seams, focal points, finish and edge details.'],['04','Pack & deliver','Approve production, inspection and export packing.']].map((step) => <div><span>{step[0]}</span><h3>{step[1]}</h3><p>{step[2]}</p></div>)}
+      </div>
+      <a class="text-link light-link" href="/factory/">Explore our supply process →</a>
+    </div>
+  </section>
+
+  <section class="section container">
+    <SectionHeading eyebrow="Search-led stone guide" title="Answers for better buying decisions." copy="Guides built around how buyers actually search: slabs, countertops, price, care and project selection." />
+    <div class="card-grid">
+      {posts.slice(0, 3).map((post) => <a class="visual-card" href={`/stone-guide/${post.slug}/`}><div class="media"><img src={post.image} alt={post.title} loading="lazy" /></div><div class="body"><p class="eyebrow">{post.readTime}</p><h3>{post.title}</h3><p>{post.description}</p></div></a>)}
+    </div>
+  </section>
+  <InquiryBand />
+</BaseLayout>
+
+<style>
+  .home-hero { height: calc(100vh - 118px); min-height: 700px; position: relative; display: flex; align-items: end; color: white; overflow: hidden; background: #171714; }
+  .home-hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .home-hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg,rgba(10,10,9,.77),rgba(10,10,9,.08) 72%),linear-gradient(0deg,rgba(10,10,9,.6),transparent 55%); }
+  .home-hero-content { position: relative; z-index: 2; width: min(1380px,92vw); margin: 0 auto; padding-bottom: clamp(5rem,9vw,9rem); }
+  .home-hero h1 { max-width: 1000px; }
+  .home-hero h1 em { color: #d9b9a8; font-weight: 400; }
+  .home-hero-content > p:not(.eyebrow) { max-width: 650px; color: #e4ded3; font-size: 1.1rem; margin: 1.6rem 0 2rem; }
+  .hero-note { position: absolute; z-index: 2; right: 2rem; bottom: 1rem; font-size: .66rem; color: #c6c0b6; text-transform: uppercase; letter-spacing: .12em; }
+  .number-list { list-style: none; padding: 0; margin: 2rem 0; border-top: 1px solid var(--line); }
+  .number-list li { display: grid; grid-template-columns: 45px 1fr; gap: 1rem; padding: 1.2rem 0; border-bottom: 1px solid var(--line); }
+  .number-list span { color: var(--bronze); font-size: .74rem; }
+  .number-list strong { font-family: var(--serif); font-size: 1.18rem; }
+  .number-list p { margin: .3rem 0 0; font-size: .88rem; }
+  .slab-showcase { background: #ded8cd; }
+  .slab-strip { display: grid; grid-template-columns: repeat(5,1fr); gap: .6rem; margin-bottom: 2rem; }
+  .slab-tile { background: #141413; overflow: hidden; }
+  .slab-tile img { width: 100%; aspect-ratio: 3/4; object-fit: contain; transition: .5s; }
+  .slab-tile:hover img { transform: scale(1.02); }
+  .slab-tile > span { display: block; color: white; padding: 1rem; font-family: var(--serif); }
+  .slab-tile small { display: block; color: #908d86; font-family: var(--sans); margin-top: .3rem; }
+  .process-section { background: var(--ink); color: white; padding: clamp(5rem,9vw,10rem) 0; }
+  .process-grid { display: grid; grid-template-columns: repeat(4,1fr); margin: 2rem 0 3rem; border-top: 1px solid #4a4945; border-bottom: 1px solid #4a4945; }
+  .process-grid > div { padding: 2rem; border-right: 1px solid #4a4945; }
+  .process-grid > div:last-child { border: 0; }
+  .process-grid span { color: #b99771; font-size: .75rem; }
+  .process-grid h3 { margin: 1.5rem 0 .8rem; }
+  .process-grid p { color: #aaa69d; font-size: .9rem; }
+  @media(max-width:900px){ .slab-strip{grid-template-columns:repeat(3,1fr)} .slab-tile:nth-child(n+4){display:none}.process-grid{grid-template-columns:1fr 1fr}.process-grid>div:nth-child(2){border-right:0}.process-grid>div:nth-child(-n+2){border-bottom:1px solid #4a4945} }
+  @media(max-width:600px){ .home-hero{min-height:650px}.hero-note{display:none}.slab-strip{grid-template-columns:1fr 1fr}.slab-tile:nth-child(3){display:none}.process-grid{grid-template-columns:1fr}.process-grid>div{border-right:0;border-bottom:1px solid #4a4945}.process-grid>div:nth-child(-n+2){border-bottom:1px solid #4a4945} }
+</style>

@@ -1,0 +1,25 @@
+{
+  "slug": "new-stone-slab-01",
+  "name": "New Stone Slab 01",
+  "productSlug": "new-stone-product",
+  "material": "Natural Quartzite",
+  "type": "Slab",
+  "finish": "Polished",
+  "thickness": "20mm / 30mm",
+  "nominalSize": "Call for available slab sizes",
+  "availability": "Current lots available",
+  "lotLabel": "Representative Lot",
+  "approxSize": "",
+  "m2PerSlab": "",
+  "gallery": [
+    {
+      "src": "/assets/images/slabs/new-stone-slab-01.webp",
+      "alt": "Complete New Stone slab lot photo",
+      "role": "slab-full"
+    }
+  ],
+  "statusNote": "Slab lots update quickly. Please contact us for current lot photos, quantities, and updated slab sizes.",
+  "inquiryPrompt": "Ask for current photos, finish, thickness, quantity, and destination port.",
+  "tags": ["stone", "slab"]
+}
+

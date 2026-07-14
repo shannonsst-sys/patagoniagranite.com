@@ -1,0 +1,12 @@
+---
+import BaseLayout from '@components/BaseLayout.astro';
+import SectionHeading from '@components/SectionHeading.astro';
+import InquiryBand from '@components/InquiryBand.astro';
+import { applications } from '@data/galleries';
+---
+<BaseLayout title="Patagonia Granite Applications" description="Explore Patagonia Granite kitchens, vanities, feature walls, hotel receptions, bars, stairs and custom stone project applications.">
+  <section class="page-hero"><img src="/assets/images/applications/patagonia-granite-hotel-reception-counter-01.webp" alt="Patagonia Granite hotel reception counter and wall panels" /><div class="page-hero-content"><div><p class="eyebrow">Applications</p><h1>From slab to focal point.</h1><p>Translate natural mineral movement into kitchens, hospitality spaces, furniture, walls, floors and one-of-one architectural surfaces.</p></div></div></section>
+  <section class="section container"><SectionHeading eyebrow="Project inspiration" title="Design around the strongest part of the slab." copy="These images show application directions. Final color, scale and mineral placement depend on the exact approved slabs and layout." /><div class="card-grid">{applications.map((item)=><article class="visual-card"><div class="media"><img src={item.image} alt={`${item.title} application with Patagonia Granite`} loading="lazy" /></div><div class="body"><h3>{item.title}</h3><p>{item.description}</p></div></article>)}</div></section>
+  <section class="section container split reverse"><div class="split-media"><img src="/assets/images/factory/patagonia-granite-project-dry-lay-layout-02.webp" alt="Dry layout of cut-to-size Patagonia Granite project pieces" loading="lazy" /></div><div class="split-copy"><p class="eyebrow">From image to production</p><h2>Send drawings before selecting slabs.</h2><p>Drawings help us estimate yield, find the right crystal scale and plan how the visual field continues across panels. Include finished dimensions, visible faces, edge details, cutouts, thickness and destination.</p><a class="text-link" href="/contact/">Send project details →</a></div></section>
+  <InquiryBand />
+</BaseLayout>
