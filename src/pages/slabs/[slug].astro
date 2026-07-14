@@ -2,21 +2,40 @@
 import BaseLayout from '@components/BaseLayout.astro';
 import InquiryBand from '@components/InquiryBand.astro';
 import { slabs, product } from '@data/slabs';
+import { applications } from '@data/galleries';
 
 export function getStaticPaths() { return slabs.map((slab) => ({ params: { slug: slab.slug }, props: { slab } })); }
 const { slab } = Astro.props;
+const applicationCounts = [4, 2, 6, 2, 2, 3, 3, 3, 3, 3, 4, 3, 3, 3];
+const slabIndex = slabs.findIndex((item) => item.code === slab.code);
+const slabNumber = slab.code.slice(-2);
+const productApplications = Array.from({ length: applicationCounts[slabIndex] }, (_, index) => ({
+  title: `${slab.code} kitchen concept ${String(index + 1).padStart(2, '0')}`,
+  category: 'Slab-specific kitchen',
+  image: `/assets/images/products/patagonia-granite/patagonia-granite-slab-${slabNumber}-kitchen-island-${String(index + 1).padStart(2, '0')}.webp`,
+}));
+const sharedApplications = [applications[4], applications[8], applications[10], applications[13], applications[16], applications[17]];
+const caseStudies = [...productApplications, ...sharedApplications];
 const schema = { '@context':'https://schema.org', '@type':'Product', name:slab.name, image:[new URL(slab.image,'https://patagoniagranite.com').href], description:`${slab.tone}. Representative natural Patagonia Granite slab. Contact TM Stone for current lot availability.`, material:'Natural Patagonia Granite', brand:{'@type':'Brand',name:'TM Stone'} };
 ---
 <BaseLayout title={`${slab.code} Patagonia Granite Slab`} description={`${slab.code}: ${slab.tone}. View complete slab, details and application reference. Request current lot availability, dimensions and quotation.`} image={slab.image} schema={schema}>
   <section class="slab-detail">
-    <div class="slab-stage"><img src={slab.image} alt={`Complete natural Patagonia Granite slab ${slab.code}`} fetchpriority="high" data-main-image /></div>
+    <div class="slab-visual">
+      <div class="slab-stage"><img src={slab.image} alt={`Complete natural Patagonia Granite slab ${slab.code}`} fetchpriority="high" data-main-image /></div>
+      <div class="view-selector"><p>Choose a view</p><div class="thumb-grid"><button type="button" data-src={slab.image} aria-label="Show complete slab"><img src={slab.image} alt={`${slab.code} complete slab thumbnail`} /></button><button type="button" data-src={slab.detail} aria-label="Show stone detail"><img src={slab.detail} alt={`${slab.code} Patagonia Granite texture detail`} /></button><button type="button" data-src={slab.application} aria-label="Show application reference"><img src={slab.application} alt={`${slab.code} Patagonia Granite application reference`} /></button></div></div>
+    </div>
     <div class="slab-info"><p class="eyebrow">Representative slab · {slab.code}</p><h1>{slab.tone}</h1><p>Natural Patagonia Granite selected for its individual mineral composition. Use this face as a visual reference and contact us to confirm the current lot.</p><table class="spec-table"><tbody><tr><th>Type</th><td>Natural stone slab</td></tr><tr><th>Finish</th><td>Polished · other finishes on request</td></tr><tr><th>Thickness</th><td>{product.thicknesses.join(' · ')}</td></tr><tr><th>Nominal size</th><td>Call for available slab sizes</td></tr><tr><th>Availability</th><td>Contact for latest slabs</td></tr></tbody></table><p class="notice">Slab lots update quickly. Please contact us for current lot photos, quantities, and updated slab sizes.</p><div class="button-row"><a class="button" href={`/contact/?slab=${slab.code}`}>Ask about {slab.code}</a><a class="text-link" href="/slabs/">All slabs →</a></div></div>
   </section>
-  <section class="section container"><div class="thumb-grid"><button type="button" data-src={slab.image}><img src={slab.image} alt={`${slab.code} complete slab thumbnail`} /></button><button type="button" data-src={slab.detail}><img src={slab.detail} alt={`${slab.code} Patagonia Granite texture detail`} /></button><button type="button" data-src={slab.application}><img src={slab.application} alt={`${slab.code} Patagonia Granite application reference`} /></button></div></section>
   <section class="section container split"><div class="split-copy"><p class="eyebrow">Selection guidance</p><h2>Approve the composition before cutting.</h2><p>Use the complete slab face to place focal crystals, plan cutouts, align waterfall returns and reduce visually disruptive seams. For backlit concepts, test the exact slab and intended lighting system.</p><a class="text-link" href="/factory/">How we plan and fabricate →</a></div><div class="split-media"><img src={slab.application} alt={`${slab.code} used in a custom interior application`} loading="lazy" /></div></section>
+  <section class="section case-section">
+    <div class="container case-heading"><p class="eyebrow">{caseStudies.length} application references</p><h2>See {slab.code} in context.</h2><p>Slab-specific kitchen studies are shown with additional Patagonia Granite project directions. Click any image to inspect it at full size.</p></div>
+    <div class="container case-gallery">
+      {caseStudies.map((item, index) => <figure class:list={['case-card', index % 5 === 0 && 'wide']}><img src={item.image} alt={`${item.title} using Patagonia Granite`} loading="lazy" /><figcaption><span>{item.category}</span>{item.title}</figcaption></figure>)}
+    </div>
+  </section>
   <InquiryBand title={`Request current availability for ${slab.code}`} />
-  <script is:inline>document.querySelectorAll('[data-src]').forEach((button)=>button.addEventListener('click',()=>{const main=document.querySelector('[data-main-image]');if(main)main.src=button.dataset.src;}));</script>
+  <script is:inline>document.querySelectorAll('[data-src]').forEach((button)=>button.addEventListener('click',()=>{const main=document.querySelector('[data-main-image]');if(main){main.src=button.dataset.src;main.alt=button.querySelector('img')?.alt?.replace(' thumbnail','')||main.alt;}document.querySelectorAll('[data-src]').forEach((item)=>item.classList.toggle('active',item===button));}));document.querySelector('[data-src]')?.classList.add('active');</script>
 </BaseLayout>
 <style>
-  .slab-detail{width:min(1500px,94vw);margin:0 auto;padding:clamp(3rem,6vw,7rem) 0;display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(2rem,6vw,7rem);align-items:center}.slab-stage{aspect-ratio:16/9;background:#171716;display:grid;place-items:center;overflow:hidden}.slab-stage img{width:100%;height:100%;object-fit:cover}.slab-info h1{font-size:clamp(3rem,6vw,6rem)}.slab-info>p{color:var(--muted);margin-top:1.3rem}.thumb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.thumb-grid button{border:1px solid var(--line);padding:0;background:#191918;cursor:pointer;aspect-ratio:16/9;overflow:hidden}.thumb-grid img{width:100%;height:100%;object-fit:cover}@media(max-width:900px){.slab-detail{grid-template-columns:1fr}}@media(max-width:600px){.thumb-grid{grid-template-columns:1fr 1fr}.thumb-grid button:last-child{grid-column:1/-1}}
+  .slab-detail{width:min(1500px,94vw);margin:0 auto;padding:clamp(3rem,6vw,7rem) 0;display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(2rem,6vw,7rem);align-items:start}.slab-stage{aspect-ratio:16/9;background:#171716;display:grid;place-items:center;overflow:hidden}.slab-stage img{width:100%;height:100%;object-fit:cover}.slab-info h1{font-size:clamp(3rem,6vw,6rem)}.slab-info>p{color:var(--muted);margin-top:1.3rem}.view-selector{margin-top:1rem}.view-selector>p{margin:0 0 .6rem;color:var(--muted);font-size:.68rem;text-transform:uppercase;letter-spacing:.14em}.thumb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}.thumb-grid button{border:2px solid transparent;padding:0;background:#191918;cursor:pointer;aspect-ratio:16/9;overflow:hidden;opacity:.72;transition:.2s}.thumb-grid button:hover,.thumb-grid button.active{border-color:var(--bronze);opacity:1}.thumb-grid img{width:100%;height:100%;object-fit:cover}.case-section{background:#e8e1d6}.case-heading{max-width:900px;margin-bottom:3rem}.case-heading>p:last-child{max-width:650px;color:var(--muted);margin-top:1.3rem}.case-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.case-card{margin:0;background:white}.case-card.wide{grid-column:span 2}.case-card img{width:100%;aspect-ratio:4/3;object-fit:cover}.case-card.wide img{aspect-ratio:2/1}.case-card figcaption{padding:1rem;font-family:var(--serif);font-size:1.05rem}.case-card figcaption span{display:block;margin-bottom:.2rem;color:var(--bronze);font-family:var(--sans);font-size:.62rem;text-transform:uppercase;letter-spacing:.12em}@media(max-width:900px){.slab-detail{grid-template-columns:1fr}.case-gallery{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.case-gallery{grid-template-columns:1fr}.case-card.wide{grid-column:auto}.case-card.wide img{aspect-ratio:4/3}}
 </style>
