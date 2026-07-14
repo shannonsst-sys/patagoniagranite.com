@@ -35,7 +35,7 @@ export const posts: Post[] = [
     title: 'Patagonia Granite Countertops: Is It Right for a Kitchen?',
     description: 'A practical guide to Patagonia Granite kitchen islands, countertop performance, layout, finish, care and fabrication decisions.',
     date: '2026-07-14', readTime: '7 min',
-    image: '/assets/images/applications/patagonia-granite-kitchen-island-02.webp',
+    image: '/assets/images/applications/patagonia-granite-kitchen-island-02-site.webp',
     intro: 'Patagonia Granite can create an extraordinary kitchen, but it should be treated as a composed natural surface rather than a repeatable countertop color. The strongest projects coordinate slab choice, support, seams, cutouts and finish from the beginning.',
     sections: [
       { heading: 'Where it performs best', paragraphs: ['Granite is widely used on heavily used surfaces because of its durability and abrasion resistance. Patagonia offers the same natural-stone practicality with a far more expressive mineral scale. It is especially effective on waterfall islands, full-height backsplashes and large focal counters.'], bullets: ['Island faces with uninterrupted crystal fields', 'Backsplashes cut from the same or adjacent slab', 'Bar tops and dining tables with a single focal composition', 'Feature panels where optional backlighting can be tested'] },

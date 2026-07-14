@@ -7,8 +7,8 @@ const applicationCopy = {
 };
 
 export const applications = [
-  ['Sculptural kitchen island', 'patagonia-granite-kitchen-island-01.webp', 'Kitchens'],
-  ['Waterfall kitchen island', 'patagonia-granite-kitchen-island-02.webp', 'Kitchens'],
+  ['Sculptural kitchen island', 'patagonia-granite-kitchen-island-01-site.webp', 'Kitchens'],
+  ['Waterfall kitchen island', 'patagonia-granite-kitchen-island-02-site.webp', 'Kitchens'],
   ['Contemporary kitchen centerpiece', 'patagonia-granite-kitchen-island-03.webp', 'Kitchens'],
   ['Patagonia statement kitchen', 'patagonia-granite-kitchen-island-04.webp', 'Kitchens'],
   ['Double vanity composition', 'patagonia-granite-bathroom-double-vanity-01.webp', 'Bathrooms'],
