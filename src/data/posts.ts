@@ -16,7 +16,7 @@ export const posts: Post[] = [
     title: 'Patagonia Granite Slabs: Selection, Thickness & Buying Guide',
     description: 'How to compare Patagonia Granite slabs, confirm current lots, choose thickness and plan fabrication for international projects.',
     date: '2026-07-14', readTime: '8 min',
-    image: '/assets/images/products/patagonia-granite/patagonia-granite-slab-01.webp',
+    image: '/assets/images/products/patagonia-granite/patagonia-granite-slab-01-full.webp',
     intro: 'Patagonia Granite is purchased slab by slab. Its oversized crystals, translucent areas and contrasting mineral fields make every block—and every cut—different. The safest buying process begins with real slab photographs and ends with an approved layout.',
     sections: [
       { heading: 'What makes Patagonia Granite different?', paragraphs: ['Patagonia is a dramatic Brazilian pegmatitic granite. Instead of a fine, repeating grain, it often contains very large feldspar and quartz crystals, dark mineral fragments and areas that may transmit light. This is why it works so well for signature islands, backlit walls and collectible tables—and why a small sample cannot represent a full slab.'], bullets: ['Oversized mineral crystals and natural void-like movement', 'Strong variation between slabs and bundles', 'Potentially translucent quartz areas that should be light-tested', 'Best results when the final cuts are composed before fabrication'] },
@@ -54,7 +54,7 @@ export const posts: Post[] = [
     title: 'Patagonia Granite Price: 9 Factors Behind a Real Quote',
     description: 'Understand what changes Patagonia Granite slab and fabricated-project pricing without relying on an outdated single price per square foot.',
     date: '2026-07-14', readTime: '6 min',
-    image: '/assets/images/products/patagonia-granite/patagonia-granite-slab-13.webp',
+    image: '/assets/images/products/patagonia-granite/patagonia-granite-slab-13-full.webp',
     intro: 'There is no durable single price for Patagonia Granite. The material is graded slab by slab, while the finished project depends on yield, layout, cut complexity, packing and destination. A useful quote starts with the actual lot and project drawings.',
     sections: [
       { heading: 'The nine cost drivers', paragraphs: ['The largest differences often come from material character and project yield rather than the nominal square metre alone.'], bullets: ['Block and slab grade', 'Crystal scale, clarity and color balance', 'Slab dimensions and thickness', 'Current lot availability', 'Polished, honed, leathered or specialty finish', 'Bookmatch or backlight selection', 'Cutouts, mitres, curved work and edge profiles', 'Packing method and breakage allowance', 'Freight, port and delivery timing'] },

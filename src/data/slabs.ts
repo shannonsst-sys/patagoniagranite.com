@@ -22,7 +22,7 @@ export const slabs: Slab[] = Array.from({ length: 14 }, (_, index) => {
     slug: `patagonia-granite-slab-${number}`,
     code: `PAT-${number}`,
     name: `Patagonia Granite Slab ${number}`,
-    image: `/assets/images/products/patagonia-granite/patagonia-granite-slab-${number}.webp`,
+    image: `/assets/images/products/patagonia-granite/patagonia-granite-slab-${number}-full.webp`,
     detail: `/assets/images/products/patagonia-granite/patagonia-granite-slab-${number}-detail.webp`,
     application: `/assets/images/products/patagonia-granite/patagonia-granite-slab-${number}-kitchen-island-01.webp`,
     tone: tones[index],
