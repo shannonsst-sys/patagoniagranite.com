@@ -1,11 +1,37 @@
+const applicationCopy = {
+  Kitchens: 'Waterfall islands and worktops composed around the strongest mineral movement.',
+  Bathrooms: 'Vanities and wall panels coordinated for clean joints and balanced crystal placement.',
+  Hospitality: 'Statement counters, floors and backlit surfaces for memorable commercial interiors.',
+  'Feature walls': 'Large-format focal surfaces planned around scale, continuity and natural contrast.',
+  'Stairs & floors': 'Cut-to-size architectural pieces developed from approved drawings and slab layouts.',
+};
+
 export const applications = [
-  ['Kitchen islands', 'patagonia-granite-kitchen-island-01.webp', 'Waterfall islands and countertops planned around the strongest mineral movement.'],
-  ['Bathroom vanities', 'patagonia-granite-bathroom-double-vanity-01.webp', 'Vanity tops and wall panels with coordinated cuts and restrained joints.'],
-  ['Hotel reception', 'patagonia-granite-hotel-lobby-reception-01.webp', 'Statement counters and backlit panels for hospitality and commercial interiors.'],
-  ['Feature walls', 'patagonia-granite-living-room-feature-wall-01.webp', 'Large-format panels, bookmatch studies and focal crystal placement.'],
-  ['Stairs & flooring', 'patagonia-granite-staircase-wall-floor-01.webp', 'Cut-to-size treads, risers and floor layouts prepared from approved drawings.'],
-  ['Bar counters', 'patagonia-granite-commercial-bar-counter-01.webp', 'Durable, expressive surfaces for bars, lounges and collectible furniture.'],
-].map(([title, file, description]) => ({ title, image: `/assets/images/applications/${file}`, description }));
+  ['Sculptural kitchen island', 'patagonia-granite-kitchen-island-01.webp', 'Kitchens'],
+  ['Waterfall kitchen island', 'patagonia-granite-kitchen-island-02.webp', 'Kitchens'],
+  ['Contemporary kitchen centerpiece', 'patagonia-granite-kitchen-island-03.webp', 'Kitchens'],
+  ['Patagonia statement kitchen', 'patagonia-granite-kitchen-island-04.webp', 'Kitchens'],
+  ['Double vanity composition', 'patagonia-granite-bathroom-double-vanity-01.webp', 'Bathrooms'],
+  ['Bookmatched double vanity', 'patagonia-granite-bathroom-double-vanity-02.webp', 'Bathrooms'],
+  ['Natural stone vanity', 'patagonia-granite-bathroom-vanity-01.webp', 'Bathrooms'],
+  ['Patagonia vanity detail', 'patagonia-granite-bathroom-vanity-02.webp', 'Bathrooms'],
+  ['Vanity and feature wall', 'patagonia-granite-bathroom-vanity-wall-01.webp', 'Bathrooms'],
+  ['Commercial bar counter', 'patagonia-granite-commercial-bar-counter-01.webp', 'Hospitality'],
+  ['Hotel lobby floor', 'patagonia-granite-hotel-lobby-floor-01.webp', 'Hospitality'],
+  ['Hotel lobby reception', 'patagonia-granite-hotel-lobby-reception-01.webp', 'Hospitality'],
+  ['Reception counter and wall', 'patagonia-granite-hotel-reception-counter-01.webp', 'Hospitality'],
+  ['Living room feature wall', 'patagonia-granite-living-room-feature-wall-01.webp', 'Feature walls'],
+  ['Backlit feature wall', 'patagonia-granite-living-room-feature-wall-02.webp', 'Feature walls'],
+  ['Large-format focal wall', 'patagonia-granite-living-room-feature-wall-03.webp', 'Feature walls'],
+  ['Patagonia television wall', 'patagonia-granite-living-room-tv-wall-01.webp', 'Feature walls'],
+  ['Staircase wall and floor', 'patagonia-granite-staircase-wall-floor-01.webp', 'Stairs & floors'],
+  ['Architectural stair composition', 'patagonia-granite-staircase-wall-floor-02.webp', 'Stairs & floors'],
+].map(([title, file, category]) => ({
+  title,
+  category,
+  image: `/assets/images/applications/${file}`,
+  description: applicationCopy[category as keyof typeof applicationCopy],
+}));
 
 export const factorySteps = [
   ['Brazilian block sourcing', 'patagonia-granite-quarry-overview-01.webp', 'Selected Brazilian resources are reviewed for usable scale, mineral composition and project character.'],

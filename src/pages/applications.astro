@@ -3,10 +3,49 @@ import BaseLayout from '@components/BaseLayout.astro';
 import SectionHeading from '@components/SectionHeading.astro';
 import InquiryBand from '@components/InquiryBand.astro';
 import { applications } from '@data/galleries';
+const categories = ['All', ...new Set(applications.map((item) => item.category))];
+const slabStudies = Array.from({ length: 14 }, (_, index) => {
+  const number = String(index + 1).padStart(2, '0');
+  return {
+    code: `PAT-${number}`,
+    image: `/assets/images/products/patagonia-granite/patagonia-granite-slab-${number}-kitchen-island-02.webp`,
+  };
+});
 ---
 <BaseLayout title="Patagonia Granite Applications" description="Explore Patagonia Granite kitchens, vanities, feature walls, hotel receptions, bars, stairs and custom stone project applications.">
   <section class="page-hero"><img src="/assets/images/applications/patagonia-granite-hotel-reception-counter-01.webp" alt="Patagonia Granite hotel reception counter and wall panels" /><div class="page-hero-content"><div><p class="eyebrow">Applications</p><h1>From slab to focal point.</h1><p>Translate natural mineral movement into kitchens, hospitality spaces, furniture, walls, floors and one-of-one architectural surfaces.</p></div></div></section>
-  <section class="section container"><SectionHeading eyebrow="Project inspiration" title="Design around the strongest part of the slab." copy="These images show application directions. Final color, scale and mineral placement depend on the exact approved slabs and layout." /><div class="card-grid">{applications.map((item)=><article class="visual-card"><div class="media"><img src={item.image} alt={`${item.title} application with Patagonia Granite`} loading="lazy" /></div><div class="body"><h3>{item.title}</h3><p>{item.description}</p></div></article>)}</div></section>
+  <section class="section container">
+    <SectionHeading eyebrow="19 project directions" title="Design around the strongest part of the slab." copy="Browse every application image in the project collection. Final color, scale and mineral placement depend on the exact approved slabs and layout." />
+    <div class="gallery-filters" aria-label="Filter applications">
+      {categories.map((category, index) => <button type="button" class:list={{ active: index === 0 }} data-filter={category} aria-pressed={index === 0 ? 'true' : 'false'}>{category}</button>)}
+    </div>
+    <div class="application-gallery">
+      {applications.map((item, index)=><article class:list={['application-card', index % 7 === 0 && 'wide']} data-gallery-item={item.category}><div class="media"><img src={item.image} alt={`${item.title} application with Patagonia Granite`} loading="lazy" /></div><div class="application-caption"><span>{item.category}</span><h3>{item.title}</h3><p>{item.description}</p></div></article>)}
+    </div>
+  </section>
+  <section class="section slab-study-section">
+    <div class="container"><SectionHeading eyebrow="14 slab-specific studies" title="See how each slab character changes a kitchen." copy="One application reference for every featured Patagonia slab, connecting the full slab selection with a possible finished composition." /></div>
+    <div class="study-strip">
+      {slabStudies.map((item)=><a href={`/slabs/patagonia-granite-slab-${item.code.slice(-2)}/`} class="study-card"><img src={item.image} alt={`${item.code} Patagonia Granite kitchen island application study`} loading="lazy" /><span>{item.code}<small>View matching slab →</small></span></a>)}
+    </div>
+  </section>
   <section class="section container split reverse"><div class="split-media"><img src="/assets/images/factory/patagonia-granite-project-dry-lay-layout-02.webp" alt="Dry layout of cut-to-size Patagonia Granite project pieces" loading="lazy" /></div><div class="split-copy"><p class="eyebrow">From image to production</p><h2>Send drawings before selecting slabs.</h2><p>Drawings help us estimate yield, find the right crystal scale and plan how the visual field continues across panels. Include finished dimensions, visible faces, edge details, cutouts, thickness and destination.</p><a class="text-link" href="/contact/">Send project details →</a></div></section>
   <InquiryBand />
+  <script is:inline>
+    const filterButtons = [...document.querySelectorAll('[data-filter]')];
+    const galleryItems = [...document.querySelectorAll('[data-gallery-item]')];
+    filterButtons.forEach((button) => button.addEventListener('click', () => {
+      const selected = button.dataset.filter;
+      filterButtons.forEach((item) => {
+        const active = item === button;
+        item.classList.toggle('active', active);
+        item.setAttribute('aria-pressed', String(active));
+      });
+      galleryItems.forEach((item) => { item.hidden = selected !== 'All' && item.dataset.galleryItem !== selected; });
+    }));
+  </script>
 </BaseLayout>
+
+<style>
+  .gallery-filters{display:flex;flex-wrap:wrap;gap:.6rem;margin:-2rem 0 2.5rem}.gallery-filters button{border:1px solid var(--line);background:transparent;padding:.7rem 1rem;color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;cursor:pointer}.gallery-filters button.active,.gallery-filters button:hover{background:var(--ink);border-color:var(--ink);color:white}.application-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}.application-card{background:white}.application-card[hidden]{display:none}.application-card.wide{grid-column:span 2}.application-card .media{aspect-ratio:4/3;overflow:hidden;background:var(--paper-2)}.application-card.wide .media{aspect-ratio:2/1}.application-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}.application-card:hover img{transform:scale(1.025)}.application-caption{padding:1.25rem}.application-caption span{color:var(--bronze);font-size:.65rem;text-transform:uppercase;letter-spacing:.16em}.application-caption h3{margin:.35rem 0 .65rem}.application-caption p{color:var(--muted);font-size:.85rem;margin:0}.slab-study-section{background:#1a1a18;color:white;overflow:hidden}.slab-study-section :global(.section-heading>p:last-child){color:#aaa69d}.study-strip{display:grid;grid-template-columns:repeat(14,minmax(280px,1fr));gap:1rem;width:max-content;padding:0 max(4vw,calc((100vw - var(--max))/2));overflow:visible}.slab-study-section{overflow-x:auto}.study-card{width:280px;background:#111}.study-card img{width:100%;aspect-ratio:16/10;object-fit:cover}.study-card>span{display:block;padding:1rem;font-family:var(--serif)}.study-card small{display:block;margin-top:.25rem;color:#8f8c84;font-family:var(--sans);font-size:.68rem;text-transform:uppercase;letter-spacing:.08em}@media(max-width:900px){.application-gallery{grid-template-columns:repeat(2,1fr)}.application-card.wide{grid-column:span 2}}@media(max-width:600px){.gallery-filters{margin-top:-1rem}.application-gallery{grid-template-columns:1fr}.application-card.wide{grid-column:auto}.application-card.wide .media{aspect-ratio:4/3}.study-card{width:250px}.study-strip{grid-template-columns:repeat(14,250px)}}
+</style>
