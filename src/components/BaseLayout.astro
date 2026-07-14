@@ -90,7 +90,7 @@ const orgSchema = {
       const lightboxImage = document.querySelector('[data-lightbox-image]');
       const lightboxCaption = document.querySelector('[data-lightbox-caption]');
       const galleryImages = [...document.querySelectorAll('main img:not([data-lightbox-disabled])')]
-        .filter((image) => !image.closest('.thumb-grid'));
+        .filter((image) => !image.closest('.thumb-grid') && !image.closest('a[href^="/slabs/"]'));
       let lightboxIndex = 0;
       let touchStartX = 0;
 
