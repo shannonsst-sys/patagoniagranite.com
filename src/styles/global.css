@@ -87,8 +87,8 @@ p { margin: 0 0 1rem; }
 .visual-card .body { padding: 1.4rem; }
 .visual-card .body p { margin: .7rem 0 0; color: var(--muted); font-size: .9rem; }
 .slab-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3.2rem 1.4rem; }
-.slab-card .slab-image { aspect-ratio: 4/3; background: #1a1a19; overflow: hidden; }
-.slab-card img { width: 100%; height: 100%; object-fit: contain; }
+.slab-card .slab-image { aspect-ratio: 16/9; background: #1a1a19; overflow: hidden; }
+.slab-card img { width: 100%; height: 100%; object-fit: cover; }
 .slab-meta { display: flex; justify-content: space-between; gap: 1rem; margin-top: 1rem; }
 .slab-meta span { color: var(--muted); font-size: .8rem; }
 .spec-table { width: 100%; border-collapse: collapse; margin: 2rem 0; }
