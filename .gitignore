@@ -3,4 +3,6 @@ dist/
 .astro/
 .codex-tmp/
 .DS_Store
+.astro-dev.log
+.astro-dev.err.log
 素材收集_请放这里/

@@ -71,11 +71,74 @@ const orgSchema = {
       <a href={`tel:${site.phone}`} aria-label="Call TM Stone">Call</a>
       <button type="button" aria-label="Back to top" data-top>↑</button>
     </div>
+    <dialog class="lightbox" data-lightbox aria-label="Image preview">
+      <button class="lightbox-close" type="button" aria-label="Close image preview" data-lightbox-close>×</button>
+      <button class="lightbox-arrow lightbox-prev" type="button" aria-label="Previous image" data-lightbox-prev>‹</button>
+      <figure>
+        <img src="" alt="Enlarged Patagonia Granite preview" data-lightbox-image />
+        <figcaption data-lightbox-caption></figcaption>
+      </figure>
+      <button class="lightbox-arrow lightbox-next" type="button" aria-label="Next image" data-lightbox-next>›</button>
+    </dialog>
     <script is:inline>
       const btn = document.querySelector('[data-menu-toggle]');
       const nav = document.querySelector('[data-nav]');
       btn?.addEventListener('click', () => { const open = btn.getAttribute('aria-expanded') === 'true'; btn.setAttribute('aria-expanded', String(!open)); nav?.classList.toggle('open', !open); });
       document.querySelector('[data-top]')?.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
+
+      const lightbox = document.querySelector('[data-lightbox]');
+      const lightboxImage = document.querySelector('[data-lightbox-image]');
+      const lightboxCaption = document.querySelector('[data-lightbox-caption]');
+      const galleryImages = [...document.querySelectorAll('main img:not([data-lightbox-disabled])')]
+        .filter((image) => !image.closest('.thumb-grid'));
+      let lightboxIndex = 0;
+      let touchStartX = 0;
+
+      const showLightboxImage = (index) => {
+        if (!galleryImages.length || !lightboxImage || !lightboxCaption) return;
+        lightboxIndex = (index + galleryImages.length) % galleryImages.length;
+        const source = galleryImages[lightboxIndex];
+        lightboxImage.src = source.currentSrc || source.src;
+        lightboxImage.alt = source.alt || 'Patagonia Granite image';
+        lightboxCaption.textContent = source.alt || '';
+      };
+
+      galleryImages.forEach((image, index) => {
+        image.classList.add('lightbox-trigger');
+        image.setAttribute('tabindex', '0');
+        image.setAttribute('role', 'button');
+        image.setAttribute('aria-label', `${image.alt || 'Image'} — click to enlarge`);
+        const openLightbox = (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          showLightboxImage(index);
+          lightbox?.showModal();
+          document.body.classList.add('lightbox-open');
+        };
+        image.addEventListener('click', openLightbox);
+        image.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') openLightbox(event);
+        });
+      });
+
+      const closeLightbox = () => {
+        lightbox?.close();
+        document.body.classList.remove('lightbox-open');
+      };
+      document.querySelector('[data-lightbox-close]')?.addEventListener('click', closeLightbox);
+      document.querySelector('[data-lightbox-prev]')?.addEventListener('click', () => showLightboxImage(lightboxIndex - 1));
+      document.querySelector('[data-lightbox-next]')?.addEventListener('click', () => showLightboxImage(lightboxIndex + 1));
+      lightbox?.addEventListener('click', (event) => { if (event.target === lightbox) closeLightbox(); });
+      lightbox?.addEventListener('close', () => document.body.classList.remove('lightbox-open'));
+      lightbox?.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft') showLightboxImage(lightboxIndex - 1);
+        if (event.key === 'ArrowRight') showLightboxImage(lightboxIndex + 1);
+      });
+      lightbox?.addEventListener('touchstart', (event) => { touchStartX = event.changedTouches[0].clientX; }, { passive: true });
+      lightbox?.addEventListener('touchend', (event) => {
+        const distance = event.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(distance) > 55) showLightboxImage(lightboxIndex + (distance < 0 ? 1 : -1));
+      }, { passive: true });
     </script>
   </body>
 </html>
