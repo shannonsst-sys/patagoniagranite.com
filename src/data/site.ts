@@ -2,7 +2,7 @@ export const site = {
   brand: 'Patagonia Granite',
   company: 'TM Stone',
   domain: 'https://patagoniagranite.com',
-  email: 'Info@tajmahalquartzite.net',
+  email: 'info@Patagoniagranite.com',
   phoneDisplay: '+86 187 0262 0038',
   phone: '+8618702620038',
   whatsapp: '8618702620038',
