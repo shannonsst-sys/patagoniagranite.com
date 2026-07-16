@@ -5,6 +5,11 @@ import InquiryBand from '@components/InquiryBand.astro';
 import { slabs } from '@data/slabs';
 import { applications } from '@data/galleries';
 import { posts } from '@data/posts';
+const featuredPosts = [
+  posts.find((post) => post.slug === 'patagonia-granite-colors-slab-variations'),
+  posts.find((post) => post.slug === 'patagonia-granite-slabs-buying-guide'),
+  posts.find((post) => post.slug === 'patagonia-granite-countertops-kitchens'),
+].filter(Boolean);
 ---
 <BaseLayout title="Patagonia Granite" description="Explore real Patagonia Granite slabs for kitchens, feature walls, tables and luxury projects. Current lot selection, fabrication and worldwide export support from TM Stone.">
   <section class="home-hero">
@@ -71,7 +76,7 @@ import { posts } from '@data/posts';
   <section class="section container">
     <SectionHeading eyebrow="Search-led stone guide" title="Answers for better buying decisions." copy="Guides built around how buyers actually search: slabs, countertops, price, care and project selection." />
     <div class="card-grid">
-      {posts.slice(0, 3).map((post) => <a class="visual-card" href={`/stone-guide/${post.slug}/`}><div class="media"><img src={post.image} alt={post.title} loading="lazy" /></div><div class="body"><p class="eyebrow">{post.readTime}</p><h3>{post.title}</h3><p>{post.description}</p></div></a>)}
+      {featuredPosts.map((post) => <a class="visual-card" href={`/stone-guide/${post.slug}/`}><div class="media"><img src={post.image} alt={post.title} loading="lazy" /></div><div class="body"><p class="eyebrow">{post.readTime}</p><h3>{post.title}</h3><p>{post.description}</p></div></a>)}
     </div>
   </section>
   <InquiryBand />
