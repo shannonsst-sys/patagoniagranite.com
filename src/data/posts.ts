@@ -80,7 +80,7 @@ export const posts: Post[] = [
     title: 'Patagonia Granite Colors: How to Choose White, Gold, Rose, Blue and High-Contrast Slabs',
     description: 'Compare Patagonia Granite colors, including ivory, gold, rose, grey, blue-toned and high-contrast slabs. Learn how finish, light and slab selection change the final result.',
     date: '2026-07-16', readTime: '11 min',
-    image: '/assets/images/stone-guide/patagonia-granite-colors-slab-variations.webp',
+    image: '/assets/images/stone-guide/patagonia-granite-colors-slab-variations-hero.webp',
     intro: 'Patagonia Granite does not have one fixed color. Depending on the block and slab, it may show ivory, cream, champagne, honey gold, blush pink, silver grey, charcoal, black and occasional blue-grey or smoky crystal zones. These labels are useful for searching and shortlisting, but the final purchase should always be based on the exact slab face, finish and lighting test.',
     sections: [
       {
@@ -108,7 +108,7 @@ export const posts: Post[] = [
             ['Black-and-white high contrast', 'Graphic dark fragments against pale crystal fields', 'Sculptural islands, fireplaces, gallery-like walls', 'Minimal cabinetry, simple floors, controlled lighting']
           ]
         },
-        image: { src: '/assets/images/stone-guide/patagonia-granite-colors-slab-variations.webp', alt: 'Patagonia Granite slabs in ivory, gold, rose and high-contrast colors', caption: 'Color names are descriptive. The exact slab face matters more than the trade label.' }
+        image: { src: '/assets/images/stone-guide/patagonia-granite-colors-slab-variations-hero.webp', alt: 'Patagonia Granite slabs in ivory, gold, rose and high-contrast colors', caption: 'Color names are descriptive. The exact slab face matters more than the trade label.' }
       },
       {
         heading: 'Ivory, cream, gold, rose and grey Patagonia slabs',
